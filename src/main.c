@@ -29,7 +29,7 @@ void mcp4132_set_wiper(uint8_t value) {
 
 void mcp4132_set_cutoff_frequency(float cutoff_freq) {
     
-    float R = 1 / (2 * 3.14159 * cutoff_freq * 0.0000000001); // R en ohmios
+    float R = 1 / (2 * 3.14159 * cutoff_freq * 0.0000000001);
     uint8_t wiper_value = (uint8_t)((R / 10000) * 127);
     mcp4132_set_wiper(wiper_value);
 }
@@ -45,10 +45,11 @@ void app_main() {
             mcp4132_set_wiper(95); 
             uart_driver_send_string("valor whiper: 95\n");
         } else if (mv < 900){
-            mcp4132_set_wiper(42); // 100 Hz
+            mcp4132_set_wiper(42);
             uart_driver_send_string("valor whiper: 42\n");
+        } else {
+            uart_driver_send_string("valor whiper: 64\n");
         }
-        vTaskDelay(pdMS_TO_TICKS(1000)); // Esperar 1 segundo
     }
 
     }
